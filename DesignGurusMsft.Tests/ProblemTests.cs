@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 using DesignGurusMsft.Lib;
+using DesignGurusMsft.Lib.DataStructures;
 using FluentAssertions;
 
 namespace DesignGurusMsft.Tests;
@@ -63,5 +64,37 @@ public class ProblemTests
     {
         var act = () => Problems.CanPlantFlowers(null!, 1);
         act.Should().Throw<ArgumentNullException>();
+    }
+
+    [Fact]
+    public void Can_Reverse_Linked_List_Multiple_Nodes()
+    {
+        var linkedList = new ListNode(2, new ListNode(4, new ListNode(6, new ListNode(8, new ListNode(10)))));
+        var newHead = ListNode.Reverse(linkedList);
+        newHead.Value.Should().Be(10);
+        newHead.Next!.Value.Should().Be(8);
+    }
+
+    [Fact]
+    public void Can_Reverse_Linked_List_Single_Node()
+    {
+        var linkedList = new ListNode(2);
+        var newHead = ListNode.Reverse(linkedList);
+        newHead.Value.Should().Be(2);
+    }
+
+    [Fact]
+    public void Can_Reverse_Linked_List_Two_Nodes()
+    {
+        var linkedList = new ListNode(2, new ListNode(4));
+        var newHead = ListNode.Reverse(linkedList);
+        newHead.Value.Should().Be(4);
+        newHead.Next!.Value.Should().Be(2);
+    }
+
+    [Fact]
+    public void Reverse_Does_Not_Throw_When_Head_Is_Null()
+    {
+        ListNode.Reverse(null).Should().Be(null);
     }
 }
