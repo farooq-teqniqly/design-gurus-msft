@@ -39,6 +39,7 @@ public class ProblemTests
     [InlineData(new int[]{ 0, 0, 0, 0, 0, 0, 0 }, 1, true)]
     [InlineData(new int[] { 1, 0, 0, 0, 0, 1 }, 2, false)]
     [InlineData(new[] { 0, 0, 1, 0, 0 }, 1, true)]
+    [InlineData(new[] { 0, 0, 1, 0, 0 }, 2, true)]
     [InlineData(new[] { 0 }, 1, true)]
     [InlineData(new[] { 1 }, 1, false)]
     [InlineData(new int[] {}, 1, false)]
