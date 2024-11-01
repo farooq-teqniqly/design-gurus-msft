@@ -87,7 +87,7 @@ public class Problems
 
         var leftToPlant = flowersToPlant;
 
-        for (var i = 0; i < flowerBed.Length; i++)
+        for (var i = 0; i < flowerBed.Length; i += 2)
         {
             if (leftToPlant == 0)
             {
@@ -96,24 +96,20 @@ public class Problems
 
             if (flowerBed[i] == 1)
             {
-                i++;
                 continue;
             }
 
             if (i > 0 && flowerBed[i - 1] == 1)
             {
-                i++;
                 continue;
             }
 
             if (i < flowerBed.Length - 1 && flowerBed[i + 1] == 1)
             {
-                i++;
                 continue;
             }
 
             flowerBed[i] = 1;
-            i++;
             leftToPlant--;
         }
 

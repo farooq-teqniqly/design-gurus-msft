@@ -53,7 +53,7 @@ public class ProblemTests
     [InlineData(-2)]
     public void CanPlantFlowers_When_Flowers_To_Plant_Less_Than_One_Throws(int flowersToPlant)
     {
-        var act = () => Problems.CanPlantFlowers(new int[] { 0 }, flowersToPlant);
+        var act = () => Problems.CanPlantFlowers([], flowersToPlant);
         act.Should().Throw<ArgumentOutOfRangeException>();
     }
 
