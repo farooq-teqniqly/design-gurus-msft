@@ -71,4 +71,52 @@ public class Problems
         return first[differences[0]] == second[differences[1]] &&
             first[differences[1]] == second[differences[0]];
     }
+
+    /// <summary>
+    /// Determines if flowers can be planted in a flower bed.
+    /// </summary>
+    /// <param name="flowerBed">The array representing the flower bed where 0 represents an empty spot and 1 represents a planted flower.</param>
+    /// <param name="flowersToPlant">The number of flowers to plant.</param>
+    /// <returns>True if the flowers can be planted in the flower bed; otherwise, false.</returns>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="flowerBed"/> is null.</exception>
+    /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="flowersToPlant"/> is less than 1.</exception>
+    public static bool CanPlantFlowers(int[] flowerBed, int flowersToPlant)
+    {
+        ArgumentNullException.ThrowIfNull(flowerBed);
+        ArgumentOutOfRangeException.ThrowIfLessThan(flowersToPlant, 1);
+
+        var leftToPlant = flowersToPlant;
+
+        for (var i = 0; i < flowerBed.Length; i++)
+        {
+            if (leftToPlant == 0)
+            {
+                return true;
+            }
+
+            if (flowerBed[i] == 1)
+            {
+                i++;
+                continue;
+            }
+
+            if (i > 0 && flowerBed[i - 1] == 1)
+            {
+                i++;
+                continue;
+            }
+
+            if (i < flowerBed.Length - 1 && flowerBed[i + 1] == 1)
+            {
+                i++;
+                continue;
+            }
+
+            flowerBed[i] = 1;
+            i++;
+            leftToPlant--;
+        }
+
+        return leftToPlant == 0;
+    }
 }
