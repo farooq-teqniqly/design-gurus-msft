@@ -166,4 +166,42 @@ public class Problems
 
         return minFrequency;
     }
+
+    /// <summary>
+    /// Determines the maximum number of occurrences of a word in a given input string.
+    /// </summary>
+    /// <param name="word">The word to count occurrences of.</param>
+    /// <param name="input">The input string.</param>
+    /// <returns>The maximum number of occurrences of the word in the input string.</returns>
+    public static int MaxOccurrencesOfWord(string word, string input)
+    {
+        var factors = word.GroupBy(c => c)
+            .ToDictionary(g => g.Key, g => g.Count());
+
+        var frequencies = word.Distinct().ToDictionary(c => c, _ => 0);
+
+        foreach (var letter in input)
+        {
+            if (!frequencies.ContainsKey(letter))
+            {
+                continue;
+            }
+
+            frequencies[letter] += 1;
+        }
+
+        var minFrequency = int.MaxValue;
+
+        foreach (var pair in frequencies)
+        {
+            var adjustedFrequency = pair.Value / factors[pair.Key];
+
+            if (adjustedFrequency < minFrequency)
+            {
+                minFrequency = adjustedFrequency;
+            }
+        }
+
+        return minFrequency;
+    }
 }

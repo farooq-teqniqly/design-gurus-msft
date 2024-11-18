@@ -119,4 +119,18 @@ public class ProblemTests
         var act = () => Problems.MaxBalloons(input);
         act.Should().Throw<ArgumentNullException>();
     }
+
+    [Theory]
+    [InlineData("balloon","balloonballoon", 2)]
+    [InlineData("balloon", "bbaall", 0)]
+    [InlineData("balloon", "BAlloonballoOOon", 1)]
+    [InlineData("balloon", "xyz", 0)]
+    [InlineData("balloon", "balon", 0)]
+    [InlineData("riddle", "rriddleriddler", 2)]
+    [InlineData("riddle", "ridd", 0)]
+
+    public void MaxOccurrencesOfWord_Returns_Expected_Result(string word, string input, int expectedResult)
+    {
+        Problems.MaxOccurrencesOfWord(word, input).Should().Be(expectedResult);
+    }
 }
