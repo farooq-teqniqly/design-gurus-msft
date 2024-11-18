@@ -115,4 +115,55 @@ public class Problems
 
         return leftToPlant == 0;
     }
+
+    /// <summary>
+    /// Determines the minimum frequency of the letters 'b', 'a', 'l', 'o', and 'n' in the given input string.
+    /// </summary>
+    /// <param name="input">The input string.</param>
+    /// <returns>The minimum frequency of the letters 'b', 'a', 'l', 'o', and 'n' in the input string.</returns>
+    public static int MaxBalloons(string input)
+    {
+        if (string.IsNullOrWhiteSpace(input))
+        {
+            throw new ArgumentNullException(nameof(input));
+        }
+
+        var frequencies = new Dictionary<char, int>()
+        {
+            { 'b', 0 },
+            { 'a', 0 },
+            { 'l', 0 },
+            { 'o', 0 },
+            { 'n', 1 }
+        };
+
+        foreach (var letter in input.ToLowerInvariant())
+        {
+            if (!frequencies.ContainsKey(letter))
+            {
+                continue;
+            }
+
+            frequencies[letter] += 1;
+        }
+
+        var minFrequency = int.MaxValue;
+
+        foreach (var pair in frequencies)
+        {
+            var adjustedFrequency = pair.Value;
+
+            if (pair.Key is 'l' or 'o')
+            {
+                adjustedFrequency /= 2;
+            }
+
+            if (adjustedFrequency < minFrequency)
+            {
+                minFrequency = adjustedFrequency;
+            }
+        }
+
+        return minFrequency;
+    }
 }

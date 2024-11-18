@@ -97,4 +97,26 @@ public class ProblemTests
     {
         ListNode.Reverse(null).Should().Be(null);
     }
+
+    [Theory]
+    [InlineData("balloonballoon", 2)]
+    [InlineData("bbaall", 0)]
+    [InlineData("balloonballoooon", 2)]
+    [InlineData("BAlloonballoOOon", 2)]
+    [InlineData("xyz", 0)]
+    [InlineData("balon", 0)]
+    public void MaxBalloons_Returns_Expected_Result(string input, int expectedResult)
+    {
+        Problems.MaxBalloons(input).Should().Be(expectedResult);
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData("   ")]
+    [InlineData(null)]
+    public void MaxBalloons_When_Input_Null_Throws(string input)
+    {
+        var act = () => Problems.MaxBalloons(input);
+        act.Should().Throw<ArgumentNullException>();
+    }
 }
